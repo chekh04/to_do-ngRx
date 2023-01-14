@@ -1,0 +1,45 @@
+<ng-container *ngIf="tasks?.length">
+  <table mat-table [dataSource]="tasks | searchFilter: (searchFilterText$ | async)" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="label">
+      <th mat-header-cell *matHeaderCellDef> Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.label}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description</th>
+      <td mat-cell *matCellDef="let element">
+      <div class="description">{{element.description}}</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef> Category</th>
+      <td mat-cell *matCellDef="let element"> {{element.category?.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status</th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="element.done === false">Done: false</ng-container>
+        <ng-container *ngIf="element.done !== false">Done: {{element.done | date: 'longDate'}}</ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <button (click)="editTask(element.id, actionType.edit)" mat-icon-button color="primary">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="deleteTask(element.id)" mat-icon-button color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</ng-container>
+

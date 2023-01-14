@@ -1,0 +1,19 @@
+:host {
+  table {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 15px;
+    tr {
+      td {
+        max-height: 70px;
+      }
+    }
+    .description {
+      max-width: 75%;
+      height: 100%;
+      overflow: auto;
+      padding: 10px;
+    }
+  }
+}

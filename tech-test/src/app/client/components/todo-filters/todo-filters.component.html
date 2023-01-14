@@ -1,0 +1,33 @@
+<div class="filters">
+  <div class="filter-header">
+    <button mat-raised-button (click)="addTask(actionType.create)" class="demo-button">
+      Add task
+    </button>
+    <button
+      (click)="changeFilter(filterEnum.all)"
+      [color]="(filter$ | async) === filterEnum.all ? 'primary' : null"
+      mat-button>All</button>
+    <button
+      (click)="changeFilter(filterEnum.completed)"
+      [color]="(filter$ | async) === filterEnum.completed ? 'primary' : null"
+      mat-button>Completed</button>
+    <button
+      (click)="changeFilter(filterEnum.active)"
+      [color]="(filter$ | async) === filterEnum.active ? 'primary' : null"
+      mat-button>In progress</button>
+
+    <ng-select
+      (change)="updateCategoryFilter($event)"
+      [items]="categories$ | async"
+      placeholder="Filter by category"
+      bindLabel="name"
+      bindValue="id"></ng-select>
+
+    <div class="search-input">
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search task" #input>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

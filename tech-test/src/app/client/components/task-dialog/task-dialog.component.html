@@ -1,0 +1,26 @@
+<div class="modal">
+  <div class="title">Add task</div>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="submitForm()"
+    class="form" >
+    <div class="control-wrapper">
+      <input formControlName="label">
+    </div>
+    <div class="control-wrapper">
+      <textarea formControlName="description"></textarea>
+    </div>
+    <div class="control-wrapper">
+      <ng-select [items]="categories$ | async"
+                 formControlName="category"
+                 bindLabel="name"
+                 bindValue="id">
+      </ng-select>
+    </div>
+    <div *ngIf="isEditModal" class="control-wrapper">
+      <p><mat-checkbox labelPosition="before" formControlName="done">Is completed: </mat-checkbox></p>
+    </div>
+    <button mat-button color="primary">{{isEditModal ? 'Edit task' : 'Create Task'}}</button>
+    <button (click)="closeModal()" mat-button color="primary" type="button">Cancel</button>
+  </form>
+</div>
